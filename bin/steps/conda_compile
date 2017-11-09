@@ -1,11 +1,9 @@
-if [ ! -d /app/.heroku/miniconda ]; then
-    puts-step "Preparing Python/Miniconda Environment"
-    curl -Os https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    bash Miniconda3-latest-Linux-x86_64.sh  -p /app/.heroku/miniconda/ -b | indent
-    rm -fr Miniconda3-latest-Linux-x86_64.sh
+puts-step "Preparing Python/Miniconda Environment"
+curl -Os https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh  -p /app/.heroku/miniconda/ -b | indent
+rm -fr Miniconda3-latest-Linux-x86_64.sh
 
-    conda install pip --yes | indent
-fi
+conda install pip --yes | indent
 
 echo "nomkl" > $HOME/.heroku/miniconda/conda-meta/pinned
 echo "added pinned file in $HOME/.heroku/miniconda/conda-meta/pinned"
@@ -26,7 +24,7 @@ if [ -f nltk_corpra_requirements.txt ]; then
     puts-step "Installing NLTK Corpra"
     cat nltk_corpra_requirements.txt | while read line
     do
-       python -m nltk.downloader $line
+       python3 -m nltk.downloader $line
     done
 fi
 
