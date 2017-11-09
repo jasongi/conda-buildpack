@@ -22,7 +22,9 @@ if [ -f requirements.txt ]; then
     pip install -r requirements.txt  --exists-action=w --allow-all-external | indent
 fi
 
+if [ -f nltk_corpra_requirements.txt ]; then
     puts-step "Installing NLTK Corpra"
+    cat nltk_corpra_requirements.txt | while read line
     do
        python -m nltk.downloader $line
     done
